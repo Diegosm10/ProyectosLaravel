@@ -1,0 +1,36 @@
+<Table>
+    <tr>
+        <td>
+            Nombre
+        </td>
+        <td>
+            Bio
+        </td>
+        <td>
+            Ciudad
+        </td>
+        <td>
+            Github
+        </td>
+        <td>
+            Linkedin
+        </td>
+    </td>
+    <tr>
+        <td>
+            {{$user->name}}
+        </td>
+        <td>
+            {{$user->profile->bio}}
+        </td>
+        <td>
+            {{$user->profile->location}}
+        </td>
+        <td>
+            {{$user->profile->github}}
+        </td>
+        <td>
+            {{$user->profile->linkedin}}
+        </td>
+    </tr>
+</Table>
