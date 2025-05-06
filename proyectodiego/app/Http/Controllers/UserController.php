@@ -70,27 +70,49 @@ class UserController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
-    {
-        $idUser = $id;
-        $user = User::find($idUser);
-        return view('users.usersUpdate', ['user'=> $user]);
-    }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
-    {
-        dd($request->all());
-    }
+    public function update(Request $request, $user)
+{
+    $request->validate([
+        'gender' => 'required',
+        'first_name' => 'required',
+        'last_name' => 'required',
+        'email' => 'required|email',
+        'username' => 'required'
+    ]);
+
+    $user = User::findOrFail($user);
+
+    // Asegurar que login siempre sea un array
+    $loginData = is_array($user->login) ? $user->login : json_decode($user->login, true);
+
+    // Actualizar solo username dentro de login
+    $loginData['username'] = $request->username;
+
+    // Guardar el usuario sin codificar como JSON si el campo ya es un array
+    $user->update([
+        'gender' => $request->gender,
+        'first_name' => $request->first_name,
+        'last_name' => $request->last_name,
+        'email' => $request->email,
+        'login' => $loginData
+    ]);
+
+    return redirect()->back()->with('success', 'Usuario actualizado correctamente');
+}
 
     /**
      * Remove the specified resource from storage.
      */
+
     public function destroy(string $id)
     {
-        //
+        $user = User::find($id);
+        $user->delete();
+        return redirect()->back()->with('success','Usuario eliminado correctamente');
     }
 
     public function search(Request $request)

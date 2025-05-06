@@ -1,6 +1,6 @@
 import './bootstrap';
 
-function createRandomUser(){
+window.createRandomUser = function() {
     const count = document.getElementById('count').value;
     const url = `https://randomuser.me/api/?results=${count}`;
     fetch(url)
@@ -33,5 +33,3 @@ function createRandomUser(){
         })
         .catch(error => console.error('Error fetching random users:', error));
 }
-
-window.createRandomUser = createRandomUser;
