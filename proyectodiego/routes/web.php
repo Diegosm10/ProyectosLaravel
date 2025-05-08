@@ -1,17 +1,12 @@
 <?php
 
 use App\Http\Controllers\UserController;
+use App\Http\Middleware\AccessTest;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
-});
-
-Route::get('searchUser', function () {
-    return view('searchUser');
-});
-
-Route::post('/search', [UserController::class, 'search'])->name('user.search');
+})->middleware(AccessTest::class);
 
 Route::get('/users/usersCreate', [UserController::class, 'create'])->name('user.create');
 
