@@ -31,9 +31,8 @@ class ProvinceSeeder extends Seeder
             ['name' => 'Santa Cruz'],
             ['name' => 'Santa Fe'],
             ['name' => 'Santiago del Estero'],
-            ['name' => 'Tierra del Fuego, Antarctica and South Atlantic Islands'],
-            ['name' => 'Tucumán'],
-            ['name' => 'Buenos Aires City']
+            ['name' => 'Tierra del Fuego'],
+            ['name' => 'Tucumán']
         ];
 
         DB::table('provinces')->insert($provinces);

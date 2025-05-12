@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use App\Models\Construction;
 
 class ConstructionSeeder extends Seeder
 {
@@ -12,6 +13,6 @@ class ConstructionSeeder extends Seeder
      */
     public function run(): void
     {
-        //
+        Construction::factory(10)->create();
     }
 }
