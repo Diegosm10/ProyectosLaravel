@@ -18,8 +18,8 @@ class Accesstest
     public function handle(Request $request, Closure $next): Response
     {
         $users = User::all();
-        if($users){
-            return view("users.usersCreate");
+        if ($users->isEmpty()) {
+            return redirect()->route('user.create')->with('message', 'Crea un usuario primero');
         }
         return $next($request);
     }

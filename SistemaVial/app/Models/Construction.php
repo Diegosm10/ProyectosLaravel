@@ -1,0 +1,27 @@
+<?php
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+
+class Construction extends Model
+{
+    /** @use HasFactory<\Database\Factories\ConstructionFactory> */
+    use HasFactory;
+
+    protected $fillable = [
+        'name',
+        'star_date',
+        'end_date',
+        'province_id',
+    ];
+
+    public function machines(){
+        return $this->belongsToMany(Machine::class, 'construction_machines');
+    }
+
+    public function provinces(){
+        return $this->hasMany(Province::class);
+    }
+}
