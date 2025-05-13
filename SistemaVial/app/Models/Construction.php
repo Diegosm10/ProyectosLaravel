@@ -12,7 +12,7 @@ class Construction extends Model
 
     protected $fillable = [
         'name',
-        'star_date',
+        'start_date',
         'end_date',
         'province_id',
     ];

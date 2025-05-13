@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Construction;
 use App\Http\Requests\StoreConstructionRequest;
 use App\Http\Requests\UpdateConstructionRequest;
+use App\Models\Province;
+use Illuminate\Http\Request;
 
 class ConstructionController extends Controller
 {
@@ -21,17 +23,25 @@ class ConstructionController extends Controller
      */
     public function create()
     {
-        //
+        $provinces = Province::all();
+        return view("constructions.create", ['provinces' => $provinces]);
     }
 
     /**
      * Store a newly created resource in storage.
-     */
+    */
     public function store(StoreConstructionRequest $request)
     {
-        //
-    }
+        $construction = $request->validated();
+        Construction::create([
+            'name'=> $construction['name'],
+            'start_date'=> $construction['start_date'],
+            'end_date'=> $construction['end_date'],
+            'province_id'=> $construction['province_id'],
+        ]);
 
+       return redirect()->back()->with('success', 'Construcción creada correctamente!');
+    }
     /**
      * Display the specified resource.
      */
