@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class ContructionMachine extends Model
+class ConstructionMachine extends Model
 {
     use HasFactory;
 
@@ -17,8 +17,6 @@ class ContructionMachine extends Model
         'construction_id',
         'machine_id',  
     ];
-
-    protected $table = 'construction_machines';
 
 
 }

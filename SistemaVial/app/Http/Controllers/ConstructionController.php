@@ -15,7 +15,9 @@ class ConstructionController extends Controller
      */
     public function index()
     {
-        //
+        $constructions = Construction::all();
+        $provinces = Province::all();
+        return view("constructions.list", ['constructions' => $constructions, 'provinces' => $provinces]);
     }
 
     /**

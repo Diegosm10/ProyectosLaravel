@@ -15,15 +15,27 @@
           </button>
           <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav">
-              <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="/machines/create">Máquinas</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="/constructions/create">Construcciones</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="/constructionMachines/create">Asignaciones</a>
-              </li>
+               <li class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">Máquinas</a>
+                  <ul class="dropdown-menu">
+                    <li><a class="dropdown-item" href="{{route('machines.create')}}">Crear</a></li>
+                    <li><a class="dropdown-item" href="{{route('machines.index')}}">Ver Listado</a></li>
+                  </ul>
+               </li>
+               <li class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">Construcciones</a>
+                  <ul class="dropdown-menu">
+                    <li><a class="dropdown-item" href="{{route('constructions.create')}}">Crear</a></li>
+                    <li><a class="dropdown-item" href="{{route('constructions.index')}}">Ver Listado</a></li>
+                  </ul>
+               </li>
+              <li class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">Asignaciones</a>
+                  <ul class="dropdown-menu">
+                    <li><a class="dropdown-item" href="#">Crear</a></li>
+                    <li><a class="dropdown-item" href="#">Ver Listado</a></li>
+                  </ul>
+               </li>
             </ul>
           </div>
         </div>
