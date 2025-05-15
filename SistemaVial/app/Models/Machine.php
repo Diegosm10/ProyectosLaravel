@@ -22,7 +22,7 @@ class Machine extends Model
     }
 
     public function type_machines(){
-        return $this->hasMany(TypeMachine::class);
+        return $this->belongsTo(TypeMachine::class, 'type_machine_id', 'id');
     }
 
     public function maintenances(){

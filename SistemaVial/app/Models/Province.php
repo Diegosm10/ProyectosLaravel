@@ -11,6 +11,6 @@ class Province extends Model
     ];
 
     public function constructions(){
-        return $this->belongsTo(Construction::class);
+        return $this->hasMany(Construction::class);
     }
 }

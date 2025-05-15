@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Machine;
 use App\Http\Requests\StoreMachineRequest;
 use App\Http\Requests\UpdateMachineRequest;
+use App\Models\TypeMachine;
 
 class MachineController extends Controller
 {
@@ -13,7 +14,9 @@ class MachineController extends Controller
      */
     public function index()
     {
-        //
+        $machines = Machine::with("type_machines")->get();
+        $typeMachines = TypeMachine::all();
+        return view("machines.list", ["machines" => $machines, "typeMachines" => $typeMachines]);
     }
 
     /**
@@ -21,7 +24,8 @@ class MachineController extends Controller
      */
     public function create()
     {
-        //
+        $typeMachines = TypeMachine::all();
+        return view("machines.create", ["typeMachines" => $typeMachines]);
     }
 
     /**
@@ -61,7 +65,8 @@ class MachineController extends Controller
      */
     public function destroy(Machine $machine)
     {
-        //
+        Machine::find($machine->id)->delete();
+         return redirect()->back()->with('success','Máquina eliminada correctamente');
     }
     
 }

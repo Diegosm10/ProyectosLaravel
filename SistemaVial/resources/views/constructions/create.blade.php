@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @section('content')
-<form class="row g-3" method="POST" action="{{ route('construction.store')}}">
+<form class="row g-3" method="POST" action="{{ route('constructions.store')}}">
    @csrf 
    @method("POST") 
    @if ($errors->any())

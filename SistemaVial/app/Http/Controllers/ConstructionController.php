@@ -15,9 +15,9 @@ class ConstructionController extends Controller
      */
     public function index()
     {
-        $constructions = Construction::all();
+        $constructions = Construction::with("provinces")->get();
         $provinces = Province::all();
-        return view("constructions.list", ['constructions' => $constructions, 'provinces' => $provinces]);
+        return view("constructions.list", ['constructions' => $constructions, 'provinces'=> $provinces]);
     }
 
     /**
@@ -73,6 +73,7 @@ class ConstructionController extends Controller
      */
     public function destroy(Construction $construction)
     {
-        //
+        Construction::find($construction->id)->delete();
+        return redirect()->back()->with('success','Construcción eliminada correctamente');
     }
 }

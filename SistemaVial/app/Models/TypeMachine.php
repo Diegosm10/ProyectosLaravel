@@ -12,7 +12,7 @@ class TypeMachine extends Model
     ];
 
     public function machines(){
-        return $this->belongsTo(Machine::class);
+        return $this->hasMany(Machine::class);
     }
 }
 

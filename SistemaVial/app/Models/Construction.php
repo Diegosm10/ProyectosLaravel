@@ -22,6 +22,6 @@ class Construction extends Model
     }
 
     public function provinces(){
-        return $this->hasMany(Province::class);
+        return $this->belongsTo(Province::class, 'province_id', 'id');
     }
 }

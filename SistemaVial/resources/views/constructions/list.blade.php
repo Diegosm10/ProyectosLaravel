@@ -16,7 +16,7 @@
         <td>{{$construction->name}}</td>
         <td>{{$construction->start_date}}</td>
         <td>{{$construction->end_date}}</td>
-        <td>{{$construction->province_id}}</td>
+        <td>{{$construction->provinces->name}}</td>
         <td>
           <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modal{{$construction->id}}">
             Editar
