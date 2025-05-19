@@ -16,4 +16,4 @@ Route::resource('/machines', MachineController::class);
 
 Route::resource('/constructions', ConstructionController::class);
 
-//Route::resource('/constructionMachines', ConstructionMachinesController::class);
+Route::resource('/constructionMachines', ConstructionMachinesController::class);

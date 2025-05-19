@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class ConstructionMachine extends Model
+class ConstructionMachines extends Model
 {
     use HasFactory;
 
@@ -18,5 +18,14 @@ class ConstructionMachine extends Model
         'machine_id',  
     ];
 
+      public function construction()
+    {
+        return $this->belongsTo(Construction::class, 'construction_id');
+    }
+
+    public function machine()
+    {
+        return $this->belongsTo(Machine::class, 'machine_id');
+    }
 
 }

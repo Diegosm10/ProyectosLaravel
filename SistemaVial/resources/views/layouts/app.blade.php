@@ -32,8 +32,8 @@
               <li class="nav-item dropdown">
                   <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">Asignaciones</a>
                   <ul class="dropdown-menu">
-                    <li><a class="dropdown-item" href="#">Crear</a></li>
-                    <li><a class="dropdown-item" href="#">Ver Listado</a></li>
+                    <li><a class="dropdown-item" href="{{route('constructionMachines.create')}}">Crear</a></li>
+                    <li><a class="dropdown-item" href="{{route('constructionMachines.index')}}">Ver Listado</a></li>
                   </ul>
                </li>
             </ul>

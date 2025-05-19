@@ -14,9 +14,9 @@ return new class extends Migration
         Schema::create('construction_machines', function (Blueprint $table) {
             $table->id();
             $table->date('start_date');
-            $table->date('end_date');
-            $table->string('reason_for_the_end');
-            $table->integer('km_travelede');
+            $table->date('end_date')->nullable();
+            $table->string('reason_for_the_end')->nullable();
+            $table->integer('km_traveleded')->nullable();
             $table->foreignId('construction_id')->constrained()->onDelete('cascade');
             $table->foreignId('machine_id')->constrained()->onDelete('cascade');
             $table->timestamps();

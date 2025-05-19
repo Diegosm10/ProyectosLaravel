@@ -7,6 +7,7 @@
         <th scope="col">Marca y modelo</th>
         <th scope="col">Kilómetros</th>
         <th scope="col">Tipo de máquina</th>
+        <th scope="col">Acciones</th>
       </tr>
     </thead>
     <tbody>

@@ -8,6 +8,7 @@
         <th scope="col">Fecha de inicio</th>
         <th scope="col">Fecha de fin</th>
         <th scope="col">Provincia</th>
+        <th scope="col">Acciones</th>
       </tr>
     </thead>
     <tbody>
