@@ -8,6 +8,7 @@ class Maintenance extends Model
 {
     protected $fillable = [
         'date',
+        'end_date',
         'description',
         'kilometers_maintenance',
         'machine_id',

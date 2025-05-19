@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('maintenances', function (Blueprint $table) {
             $table->id();
             $table->date('date');
+            $table->date('end_date')->nullable;
             $table->string('description');
             $table->integer('kilometers_maintenance');
             $table->foreignId('machine_id')->constrained()->onDelete('cascade');

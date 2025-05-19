@@ -23,6 +23,13 @@
                   </ul>
                </li>
                <li class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">Mantenimiento</a>
+                  <ul class="dropdown-menu">
+                    <li><a class="dropdown-item" href="{{route('maintenance.create')}}">Crear</a></li>
+                    <li><a class="dropdown-item" href="{{route('maintenance.index')}}">Ver Listado</a></li>
+                  </ul>
+               </li>
+               <li class="nav-item dropdown">
                   <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">Construcciones</a>
                   <ul class="dropdown-menu">
                     <li><a class="dropdown-item" href="{{route('constructions.create')}}">Crear</a></li>

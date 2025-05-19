@@ -33,7 +33,8 @@ class MachineController extends Controller
      */
     public function store(StoreMachineRequest $request)
     {
-        
+        Machine::create($request->all());
+        return redirect()->back()->with('success', 'Máquina creada correctamente!');
     }
 
     /**
@@ -57,7 +58,8 @@ class MachineController extends Controller
      */
     public function update(UpdateMachineRequest $request, Machine $machine)
     {
-        //
+        $machine->update($request->all());
+        return redirect()->back()->with('success','Máquina actualizada correctamente');
     }
 
     /**
@@ -66,7 +68,7 @@ class MachineController extends Controller
     public function destroy(Machine $machine)
     {
         Machine::find($machine->id)->delete();
-         return redirect()->back()->with('success','Máquina eliminada correctamente');
+        return redirect()->back()->with('success','Máquina eliminada correctamente');
     }
     
 }

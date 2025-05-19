@@ -25,7 +25,7 @@
                     <label for="inputProvince" class="form-label">Provincia: </label>
                     <select id="inputState" class="form-select" name="province_id">
                     @foreach ($provinces as $province)
-                        <option value="{{$province->id}}" @if ($province->id == $construction->province_id) selected {{$province->name}} @endif>{{$province->name}}</option>
+                        <option value="{{$province->id}}" @if ($province->id == $construction->province_id) selected {{$construction->provinces->name}} @endif>{{$province->name}}</option>
                     @endforeach
                     </select>
             </div>

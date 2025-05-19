@@ -16,7 +16,7 @@ return new class extends Migration
             $table->date('start_date');
             $table->date('end_date')->nullable();
             $table->string('reason_for_the_end')->nullable();
-            $table->integer('km_traveleded')->nullable();
+            $table->integer('km_traveled')->nullable();
             $table->foreignId('construction_id')->constrained()->onDelete('cascade');
             $table->foreignId('machine_id')->constrained()->onDelete('cascade');
             $table->timestamps();

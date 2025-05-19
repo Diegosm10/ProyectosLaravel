@@ -34,15 +34,8 @@ class ConstructionController extends Controller
     */
     public function store(StoreConstructionRequest $request)
     {
-        $construction = $request->validated();
-        Construction::create([
-            'name'=> $construction['name'],
-            'start_date'=> $construction['start_date'],
-            'end_date'=> $construction['end_date'],
-            'province_id'=> $construction['province_id'],
-        ]);
-
-       return redirect()->back()->with('success', 'Construcción creada correctamente!');
+        Construction::create($request->all());
+        return redirect()->back()->with('success', 'Construcción creada correctamente!');
     }
     /**
      * Display the specified resource.
@@ -65,7 +58,8 @@ class ConstructionController extends Controller
      */
     public function update(UpdateConstructionRequest $request, Construction $construction)
     {
-        //
+        $construction->update($request->all());
+        return redirect()->back()->with('success', 'Construcción actualizado correctamente');
     }
 
     /**
