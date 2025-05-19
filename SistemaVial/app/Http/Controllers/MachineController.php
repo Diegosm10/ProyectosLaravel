@@ -33,7 +33,7 @@ class MachineController extends Controller
      */
     public function store(StoreMachineRequest $request)
     {
-        //
+        
     }
 
     /**

@@ -22,7 +22,9 @@ class StoreMachineRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            "brand_model"=> "required|string|max:255",
+            "kilometers"=> "required|integer",
+            "type_machine_id"=> "required|exists:type_machines,id",
         ];
     }
 }
