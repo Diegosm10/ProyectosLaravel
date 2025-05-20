@@ -14,7 +14,7 @@ class Maintenance extends Model
         'machine_id',
     ];
 
-    public function machines(){
-        return $this->hasMany(Machine::class);
+    public function machine(){
+        return $this->belongsTo(Machine::class);
     }
 }

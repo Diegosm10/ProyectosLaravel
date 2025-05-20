@@ -26,6 +26,6 @@ class Machine extends Model
     }
 
     public function maintenances(){
-        return $this->belongsTo(Maintenance::class);
+        return $this->hasMany(Maintenance::class);
     }
 }
