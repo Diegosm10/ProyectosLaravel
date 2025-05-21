@@ -34,7 +34,7 @@ class MachineController extends Controller
     public function store(StoreMachineRequest $request)
     {
         Machine::create($request->all());
-        return redirect()->back()->with('success', 'Máquina creada correctamente!');
+        return redirect()->route('machines.index')->with('success', 'Máquina creada correctamente!');
     }
 
     /**
