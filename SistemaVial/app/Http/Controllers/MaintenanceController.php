@@ -16,9 +16,7 @@ class MaintenanceController extends Controller
      */
     public function index()
     {
-        $maintenances = Maintenance::with('machine')->get();
-        $machines = Machine::all();
-        return view("maintenance.list", ["machines" => $machines, "maintenances" => $maintenances]);
+
     }
 
     /**
@@ -48,16 +46,36 @@ class MaintenanceController extends Controller
             "machine_id"=> $request->machine_id,
         ]);
 
-        return redirect()->back()->with('success', 'Mantenimiento registrado correctamente!');
+        return redirect()->route('machines.index')->with('success', 'Mantenimiento registrado correctamente!');
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
-    {
-        //
+    public function show(Request $request, Machine $machine)
+{
+    $start = $request->query('start');
+    $end = $request->query('end');
+
+    $query = $machine->maintenances()->orderBy('date', 'desc');
+
+    if ($start) {
+        $query->where('date', '>=', $start);
     }
+    if ($end) {
+        $query->where('date', '<=', $end);
+    }
+
+    $machines = Machine::all();
+
+    return view('maintenance.show', [
+        'machine' => $machine,
+        'maintenances' => $query->get(),
+        'start' => $start,
+        'end' => $end,
+        'machines' => $machines,
+    ]);
+}
 
     /**
      * Show the form for editing the specified resource.
@@ -76,16 +94,14 @@ class MaintenanceController extends Controller
             'date'=> 'required|date',
             'end_date' => 'required|date',
             'description'=> 'required|string|max:255',
-            'machine_id'=> 'required|exists:machines,id',
         ]);
         $machine = Machine::find($request->machine_id);
         $maintenance->update([
             'date'=> $request->date,
             'end_date' => $request->end_date,
             'description'=> $request->description,
-            'kilometers_maintenance' => $machine->kilometers,
+            'kilometers_maintenance'=> $machine->kilometers,
             'machine_id'=> $request->machine_id,
-
         ]);
         return redirect()->back()->with('success','Mantenimiento actualizado correctamente!');
     }
@@ -95,6 +111,6 @@ class MaintenanceController extends Controller
     public function destroy(Maintenance $maintenance)
     {
         $maintenance::find($maintenance->id)->delete();
-        return redirect()->back()->with('success','Mantenimiento eliminado000000 correctamente');
+        return redirect()->back()->with('success','Mantenimiento eliminado correctamente');
     }
 }

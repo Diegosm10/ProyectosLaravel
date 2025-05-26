@@ -1,5 +1,5 @@
-<form action="{{ route('machines.destroy', $machine->id) }}" method="POST"
-      onsubmit="return confirm('¿Estás seguro de que quieres eliminar esta máquina?');">
+<form action="{{ route('maintenance.destroy', $maintenance->id) }}" method="POST"
+      onsubmit="return confirm('¿Estás seguro de que quieres eliminar este registro de mantenimiento?');">
     @csrf
     @method('DELETE')
     <button type="submit"

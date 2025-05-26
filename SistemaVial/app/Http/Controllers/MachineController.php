@@ -5,7 +5,10 @@ namespace App\Http\Controllers;
 use App\Models\Machine;
 use App\Http\Requests\StoreMachineRequest;
 use App\Http\Requests\UpdateMachineRequest;
+use App\Models\Construction;
+use App\Models\Maintenance;
 use App\Models\TypeMachine;
+use Illuminate\Http\Request;
 
 class MachineController extends Controller
 {
@@ -40,10 +43,35 @@ class MachineController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Machine $machine)
-    {
-        //
+    public function show(Request $request, Machine $machine)
+{
+    $start = $request->query('start');
+    $end = $request->query('end');
+
+    // Obra actual (sin fecha de fin)
+    $currentConstruction = $machine->constructions()
+        ->wherePivot('end_date', null)
+        ->with('province')
+        ->first();
+
+    // Historial completo o filtrado
+    $historyQuery = $machine->constructions()->with(['provinces']);
+    
+    if ($start) {
+        $historyQuery->where('start_date', '>=', $start);
     }
+    if ($end) {
+        $historyQuery->where('end_date', '<=', $end);
+    }
+
+
+    return view('machines.show', [
+        'machine' => $machine,
+        'currentConstruction' => $currentConstruction,
+        'history' => $historyQuery->get(),
+    ]);
+}
+
 
     /**
      * Show the form for editing the specified resource.

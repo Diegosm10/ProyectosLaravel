@@ -22,7 +22,8 @@ Route::middleware('auth')->group(function () {
     Route::resource('/constructions', ConstructionController::class);
     Route::resource('/machines', MachineController::class);
     Route::resource('/constructionMachines', ConstructionMachinesController::class);
-    Route::resource('/maintenance', MaintenanceController::class);
+    Route::resource('maintenance', MaintenanceController::class)->except(['show']);
+    Route::get('maintenance/machine/{machine}', [MaintenanceController::class, 'show'])->name('maintenance.show');
 });
 
 require __DIR__.'/auth.php';

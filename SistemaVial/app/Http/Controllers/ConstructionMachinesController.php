@@ -41,20 +41,10 @@ class ConstructionMachinesController extends Controller
             'construction_id'=> $request->construction_id,
             'machine_id'=> $request->machine_id,
         ]);
-        return redirect()->back()->with('success', 'Máquina asignada a construcción correctamente!');
+        return redirect()->route('constructionMachines.index')->with('success', 'Máquina asignada a construcción correctamente!');
     }
 
     public function update(Request $request, ConstructionMachines $constructionMachine){
-        $request->validate([
-            'end_date' => 'required|date',
-            'reason_for_the_end' => 'required|string|max:255',
-            'km_traveled' => 'required|integer',
-        ]);
-        $constructionMachine->update($request->all());
-        return redirect()->back()->with('success', 'Obra activa actualizada correctamente');
-    }
-
-    public function edit(Request $request, ConstructionMachines $constructionMachine){  
         $request->validate([
             'start_date' => 'required|date',
             'end_date' => 'required|date',
@@ -65,6 +55,10 @@ class ConstructionMachinesController extends Controller
         ]);
         $constructionMachine->update($request->all());
         return redirect()->back()->with('success', 'Obra activa actualizada correctamente');
+    }
+
+    public function edit(Request $request, ConstructionMachines $constructionMachine){  
+        
     }
 
     public function destroy(ConstructionMachines $constructionMachine){
