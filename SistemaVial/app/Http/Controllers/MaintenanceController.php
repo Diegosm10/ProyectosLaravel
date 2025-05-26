@@ -95,14 +95,7 @@ class MaintenanceController extends Controller
             'end_date' => 'required|date',
             'description'=> 'required|string|max:255',
         ]);
-        $machine = Machine::find($request->machine_id);
-        $maintenance->update([
-            'date'=> $request->date,
-            'end_date' => $request->end_date,
-            'description'=> $request->description,
-            'kilometers_maintenance'=> $machine->kilometers,
-            'machine_id'=> $request->machine_id,
-        ]);
+        $maintenance->update($request->all());
         return redirect()->back()->with('success','Mantenimiento actualizado correctamente!');
     }
     /**

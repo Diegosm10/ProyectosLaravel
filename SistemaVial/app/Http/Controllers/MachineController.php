@@ -6,6 +6,7 @@ use App\Models\Machine;
 use App\Http\Requests\StoreMachineRequest;
 use App\Http\Requests\UpdateMachineRequest;
 use App\Models\Construction;
+use App\Models\ConstructionMachines;
 use App\Models\Maintenance;
 use App\Models\TypeMachine;
 use Illuminate\Http\Request;
@@ -43,32 +44,37 @@ class MachineController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Request $request, Machine $machine)
+    public function show(Request $request, ConstructionMachines $constructionMachines, Construction $construction, Machine $machine)
 {
     $start = $request->query('start');
     $end = $request->query('end');
 
-    // Obra actual (sin fecha de fin)
+    /*
     $currentConstruction = $machine->constructions()
         ->wherePivot('end_date', null)
-        ->with('province')
+        ->with('provinces')
         ->first();
-
-    // Historial completo o filtrado
-    $historyQuery = $machine->constructions()->with(['provinces']);
+*/
     
+    $history = $constructionMachines::with('construction', 'machine')->findOrFail($machine->id);
+    $constructions = $construction::with('provinces')->get();
+
+    //$history = $historyQuery->get();
+    /*
     if ($start) {
-        $historyQuery->where('start_date', '>=', $start);
+    $history->wherePivot('start_date', '>=', $start);
     }
     if ($end) {
-        $historyQuery->where('end_date', '<=', $end);
+        $history->wherePivot('end_date', '<=', $end);
     }
-
-
+        */
+    //dd($history);
+    dd($machine);
     return view('machines.show', [
         'machine' => $machine,
         'currentConstruction' => $currentConstruction,
-        'history' => $historyQuery->get(),
+        'history' => $history,
+        'constructions'=> $constructions
     ]);
 }
 

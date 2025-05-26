@@ -26,7 +26,7 @@
             <div class="bg-white dark:bg-gray-800 shadow-sm rounded-lg p-6">
                 <h3 class="text-lg font-semibold text-gray-900 dark:text-gray-100">Obra actual</h3>
                 <p class="text-sm text-gray-700 dark:text-gray-300">Nombre: <strong>{{ $currentConstruction->name }}</strong></p>
-                <p class="text-sm text-gray-700 dark:text-gray-300">Provincia: <strong>{{ $currentConstruction->province->name }}</strong></p>
+                <p class="text-sm text-gray-700 dark:text-gray-300">Provincia: <strong>{{ $currentConstruction->provinces->name }}</strong></p>
                 <p class="text-sm text-gray-700 dark:text-gray-300">Inicio: <strong>{{ $currentConstruction->pivot->start_date }}</strong></p>
             </div>
             @else
@@ -62,12 +62,13 @@
                 @else
                     <ul class="mt-4 divide-y divide-gray-200 dark:divide-gray-700">
                         @foreach ($history as $record)
+                        
                             <li class="py-3">
-                                <p class="text-sm text-gray-800 dark:text-gray-200"><strong>{{ $record->name }}</strong> - {{ $record->provinces->name }}</p>
-                                <p class="text-sm text-gray-600 dark:text-gray-400">
-                                    {{ $record->start_date }} — {{ $record->end_date ?? 'Actual' }} ({{ $record->kilometers_traveled }} km)
-                                </p>
-                                <p class="text-sm italic text-gray-500 dark:text-gray-400">{{ $record->reason_for_the_end ?? '—' }}</p>
+                                <p class="text-sm italic text-gray-500 dark:text-gray-400">Obra: {{ $record->name }}</p>
+                                <p class="text-sm italic text-gray-500 dark:text-gray-400">Provincia: {{ $record->constructions->provinces->name }}</p>
+                                <p class="text-sm italic text-gray-500 dark:text-gray-400">Inicio: {{ $record->pivot->start_date }} —  Fin: {{ $record->pivot->end_date}}</p>
+                                <p class="text-sm italic text-gray-500 dark:text-gray-400">Kilometros recorridos: ({{ $record->pivot->kilometers_traveled ?? '—' }} km)</p>
+                                <p class="text-sm italic text-gray-500 dark:text-gray-400">{{ $record->pivot->reason_for_the_end ?? '—' }}</p>
                             </li>
                         @endforeach
                     </ul>
