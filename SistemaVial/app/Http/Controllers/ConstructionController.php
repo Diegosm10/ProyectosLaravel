@@ -10,9 +10,15 @@ use Illuminate\Http\Request;
 
 class ConstructionController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $constructions = Construction::with("provinces")->get();
+        $query = Construction::with('provinces');
+
+        if ($request->filled('province_id')) {
+            $query->where('province_id', $request->province_id);
+        }
+
+        $constructions = $query->get();
         $provinces = Province::all();
         return view("constructions.list", ['constructions' => $constructions, 'provinces'=> $provinces]);
     }

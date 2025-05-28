@@ -17,6 +17,24 @@
                 </div>
             @endif
 
+            <div class="bg-white dark:bg-gray-800 shadow-sm rounded-lg p-6">
+                <form method="GET" action="{{ route('constructionMachines.index') }}" class="flex gap-4 items-end flex-wrap">
+                    <div>
+                        <label for="province_id" class="block text-sm text-gray-700 dark:text-gray-300">Provincia</label>
+                        <select name="province_id" id="province_id"
+                            class="mt-1 block w-full rounded-md border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-white shadow-sm focus:ring focus:ring-indigo-200">
+                            <option value="">Todas</option>
+                            @foreach ($provinces as $province)
+                                <option value="{{ $province->id }}" {{ request('province_id') == $province->id ? 'selected' : '' }}>
+                                    {{ $province->name }}
+                                </option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <x-primary-button class="h-10">{{ __('Filtrar') }}</x-primary-button>
+                </form>
+            </div>
+
            <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg p-6">
                 <table class="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
                     <thead class="bg-gray-50 dark:bg-gray-700">

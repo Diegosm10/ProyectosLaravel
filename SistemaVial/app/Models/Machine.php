@@ -29,11 +29,4 @@ class Machine extends Model
         return $this->hasMany(Maintenance::class);
     }
 
-    public function recentMaintenance(): bool
-    {
-    return $this->maintenances()
-        ->orderByDesc('date')
-        ->where('kilometers', '>=', $this->kilometers - 80000)
-        ->exists();
-    }
 }
