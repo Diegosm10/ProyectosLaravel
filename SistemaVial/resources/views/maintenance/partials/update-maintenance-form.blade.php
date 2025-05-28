@@ -14,7 +14,7 @@
             </div>
 
 
-            <form method="POST" action="{{ route('maintenance.update', $maintenance) }}" class="space-y-4">
+            <form method="POST" action="{{ route('maintenance.update', $maintenance, $machine) }}" class="space-y-4">
                 @csrf
                 @method('PUT')
 
@@ -26,7 +26,7 @@
 
                     <div>
                         <label for="end_date" class="block text-sm font-medium text-gray-700 dark:text-gray-200">Fecha de finalización</label>
-                        <input type="date" name="end_date" id="end_date" value="{{ old('end_date',$maintenance->end_date) }}"
+                        <input type="date" name="end_date" id="end_date" value="{{ old('end_date',$maintenance->end_date ?? " ") }}"
                             class="mt-1 block w-full rounded-md border-gray-300 dark:border-gray-600 dark:bg-gray-900 dark:text-white shadow-sm focus:ring focus:ring-indigo-200" />
                     </div>
 
