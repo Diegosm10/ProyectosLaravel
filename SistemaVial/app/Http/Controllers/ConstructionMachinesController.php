@@ -6,6 +6,9 @@ use App\Models\Construction;
 use App\Models\Machine;
 use App\Models\ConstructionMachines;
 use Illuminate\Http\Request;
+use App\Events\AlertMaintenanceMachineEvent;
+use App\Notifications\MachineNeedsMaintenance;
+use Illuminate\Support\Facades\Notification;
 
 class ConstructionMachinesController extends Controller
 {
@@ -54,6 +57,14 @@ class ConstructionMachinesController extends Controller
             'machine_id' => 'required|exists:machines,id'
         ]);
         $constructionMachine->update($request->all());
+        $machine = $constructionMachine->machine;
+        $machine->kilometers += $request->km_traveled;
+        $machine->save();
+        if($machine->kilometers >= 80000 && !$machine->maintenances()->latest()->first()){
+            $machine->needsMaintenance = true;
+            $machine->save();
+            return redirect()->back()->with('success', 'Obra activa actualizada correctamente y máquina necesita mantenimiento'); 
+        };
         return redirect()->back()->with('success', 'Obra activa actualizada correctamente');
     }
 

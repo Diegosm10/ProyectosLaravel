@@ -15,3 +15,4 @@ function showKilometers() {
 }
 
 document.getElementById('inputMachine').addEventListener('change', showKilometers);
+

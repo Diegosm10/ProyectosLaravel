@@ -13,9 +13,6 @@ use Illuminate\Http\Request;
 
 class MachineController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
         $machines = Machine::with("type_machines")->get();
@@ -23,82 +20,62 @@ class MachineController extends Controller
         return view("machines.list", ["machines" => $machines, "typeMachines" => $typeMachines]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
         $typeMachines = TypeMachine::all();
         return view("machines.create", ["typeMachines" => $typeMachines]);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(StoreMachineRequest $request)
     {
         Machine::create($request->all());
         return redirect()->route('machines.index')->with('success', 'Máquina creada correctamente!');
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(Request $request, ConstructionMachines $constructionMachines, Construction $construction, Machine $machine)
-{
+ 
+    public function show(Request $request, ConstructionMachines $constructionMachines, Machine $machine)
+    {
     $start = $request->query('start');
     $end = $request->query('end');
 
-    /*
-    $currentConstruction = $machine->constructions()
-        ->wherePivot('end_date', null)
-        ->with('provinces')
-        ->first();
-*/
+  
+    $currentConstruction = $constructionMachines->with('construction.provinces')
+                            ->where('machine_id', $machine->id)
+                            ->where('end_date', null)
+                            ->first();
     
-    $history = $constructionMachines::with('construction', 'machine')->findOrFail($machine->id);
-    $constructions = $construction::with('provinces')->get();
+    $historyQuery = $constructionMachines->with('construction.provinces')
+                    ->where('machine_id', $machine->id)
+                    ->whereNotNull('end_date');
 
-    //$history = $historyQuery->get();
-    /*
+
     if ($start) {
-    $history->wherePivot('start_date', '>=', $start);
+    $historyQuery->wherePivot('start_date', '>=', $start);
     }
     if ($end) {
-        $history->wherePivot('end_date', '<=', $end);
+        $historyQuery->wherePivot('end_date', '<=', $end);
     }
-        */
-    //dd($history);
-    dd($machine);
+
+    $history = $historyQuery->orderBy('start_date', 'desc')->get();
+
     return view('machines.show', [
         'machine' => $machine,
         'currentConstruction' => $currentConstruction,
         'history' => $history,
-        'constructions'=> $constructions
     ]);
-}
+    }
 
-
-    /**
-     * Show the form for editing the specified resource.
-     */
     public function edit(Machine $machine)
     {
         //
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
     public function update(UpdateMachineRequest $request, Machine $machine)
     {
         $machine->update($request->all());
         return redirect()->back()->with('success','Máquina actualizada correctamente');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(Machine $machine)
     {
         Machine::find($machine->id)->delete();
