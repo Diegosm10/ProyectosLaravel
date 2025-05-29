@@ -79,9 +79,15 @@ class ConstructionMachinesController extends Controller
         $machine->kilometers += $request->km_traveled;
         $machine->save();
         $maintenance = $machine->maintenances()->orderByDesc('date')->first();
-        if($maintenance->kilometers_maintenance + 50000 <= $machine->kilometers){
+        if (!$maintenance && $machine->kilometers >= 50000) {
+            return redirect()->back()->with('success', 'Obra activa actualizada correctamente y máquina necesita mantenimiento'); 
+        }
+        elseif ($maintenance->kilometers_maintenance + 50000 <= $machine->kilometers){
             return redirect()->back()->with('success', 'Obra activa actualizada correctamente y máquina necesita mantenimiento'); 
         };
+
+        
+        
         return redirect()->back()->with('success', 'Obra activa actualizada correctamente');
     }
 

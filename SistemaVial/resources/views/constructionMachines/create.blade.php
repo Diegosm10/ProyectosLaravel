@@ -63,11 +63,5 @@
                 </button>
             </div>
         </form>
-
-        @if (session('success'))
-            <div class="mt-4 p-4 bg-green-500 text-white rounded-md">
-                {{ session('success') }}
-            </div>
-        @endif
     </div>
 </x-app-layout>
