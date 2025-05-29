@@ -13,12 +13,14 @@ class MaintenanceMachineMail extends Mailable
 {
     use Queueable, SerializesModels;
 
+    public $machine;
+
     /**
      * Create a new message instance.
      */
-    public function __construct()
+    public function __construct($machine)
     {
-        //
+        $this->machine = $machine;
     }
 
     /**
@@ -37,7 +39,10 @@ class MaintenanceMachineMail extends Mailable
     public function content(): Content
     {
         return new Content(
-            view: 'emails.maintenance-machine',
+            markdown: 'emails.maintenance-machine',
+            with: [
+                'machine'=> $this->machine,
+            ],
         );
     }
 

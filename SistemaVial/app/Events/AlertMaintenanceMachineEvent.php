@@ -17,14 +17,12 @@ class AlertMaintenanceMachineEvent
     public $machine;
 
 
-
     /**
      * Create a new event instance.
      */
     public function __construct($machine)
     {
         $this->machine = $machine;
-    
     }
 
     /**

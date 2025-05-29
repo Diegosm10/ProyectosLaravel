@@ -16,7 +16,6 @@ class ConstructionMachinesController extends Controller
     public function index(Request $request){
     $constructionMachines = ConstructionMachines::with(['machine.type_machines', 'construction.provinces']);
 
-    // Filtrar por provincia si se especifica
     if ($request->filled('province_id')) {
         $constructionMachines->whereHas('construction', function ($query) use ($request) {
             $query->where('province_id', $request->province_id);
@@ -25,7 +24,6 @@ class ConstructionMachinesController extends Controller
 
     $constructionMachines = $constructionMachines->get();
 
-    // Para el filtro del select
     $provinces = Province::all();
     $constructions = Construction::all();
     $machines = Machine::all();
@@ -78,21 +76,8 @@ class ConstructionMachinesController extends Controller
         $machine = $constructionMachine->machine;
         $machine->kilometers += $request->km_traveled;
         $machine->save();
-        $maintenance = $machine->maintenances()->orderByDesc('date')->first();
-        if (!$maintenance && $machine->kilometers >= 50000) {
-            return redirect()->back()->with('success', 'Obra activa actualizada correctamente y máquina necesita mantenimiento'); 
-        }
-        elseif ($maintenance->kilometers_maintenance + 50000 <= $machine->kilometers){
-            return redirect()->back()->with('success', 'Obra activa actualizada correctamente y máquina necesita mantenimiento'); 
-        };
-
-        
-        
+        event(new AlertMaintenanceMachineEvent($machine));       
         return redirect()->back()->with('success', 'Obra activa actualizada correctamente');
-    }
-
-    public function edit(Request $request, ConstructionMachines $constructionMachine){  
-        
     }
 
     public function destroy(ConstructionMachines $constructionMachine){
