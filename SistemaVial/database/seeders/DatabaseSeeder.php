@@ -22,6 +22,5 @@ class DatabaseSeeder extends Seeder
         $this->call(TypeMachineSeeder::class);
         $this->call(MachineSeeder::class);
         $this->call(ConstructionSeeder::class);
-        $this->call(ParameterMaintenanceSeeder::class);
     }
 }

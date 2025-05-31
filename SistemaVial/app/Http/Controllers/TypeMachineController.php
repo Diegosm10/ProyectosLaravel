@@ -2,18 +2,17 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\ParameterMaintenance;
-use App\Http\Requests\StoreParameterMaintenanceRequest;
-use App\Http\Requests\UpdateParameterMaintenanceRequest;
+use App\Models\TypeMachine;
+use Illuminate\Http\Request;
 
-class ParameterMaintenanceController extends Controller
+class TypeMachineController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        //
+
     }
 
     /**
@@ -27,7 +26,7 @@ class ParameterMaintenanceController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreParameterMaintenanceRequest $request)
+    public function store(Request $request)
     {
         //
     }
@@ -35,7 +34,7 @@ class ParameterMaintenanceController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(ParameterMaintenance $parameterMaintenance)
+    public function show(TypeMachine $typeMachine)
     {
         //
     }
@@ -43,7 +42,7 @@ class ParameterMaintenanceController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(ParameterMaintenance $parameterMaintenance)
+    public function edit(TypeMachine $typeMachine)
     {
         //
     }
@@ -51,15 +50,19 @@ class ParameterMaintenanceController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateParameterMaintenanceRequest $request, ParameterMaintenance $parameterMaintenance)
+    public function update(Request $request)
     {
-        //
+    foreach ($request->kilometers_maintenance as $id => $kilometers) {
+        TypeMachine::where('id', $id)->update(['kilometers_maintenance' => $kilometers]);
+    }
+
+    return redirect()->route('maintenance.create')->with('success', 'Kilómetros de mantenimiento actualizados correctamente.');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(ParameterMaintenance $parameterMaintenance)
+    public function destroy(TypeMachine $typeMachine)
     {
         //
     }

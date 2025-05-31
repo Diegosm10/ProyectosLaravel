@@ -9,6 +9,7 @@ class TypeMachine extends Model
     
     protected $fillable = [
         'name',
+        'kilometers_maintenance'
     ];
 
     public function machines(){

@@ -7,7 +7,9 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Models\Machine;
 use App\Models\Maintenance;
+use App\Models\TypeMachine;
 use Illuminate\Validation\Validator;
+use Mockery\Matcher\Type;
 
 class MaintenanceController extends Controller
 {
@@ -18,8 +20,9 @@ class MaintenanceController extends Controller
 
     public function create()
     {
-        $machines = Machine::all();
-        return view("maintenance.create", ["machines" => $machines]);
+    $machines = Machine::all();
+    $typeMachines = TypeMachine::all();
+    return view("maintenance.create", compact("machines", "typeMachines"));
     }
 
     public function store(Request $request)

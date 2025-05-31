@@ -70,4 +70,38 @@
             </div>
         </div>
     </div>
+
+    <div class="py-6">
+        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+            <div class="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-sm">
+                 <form method="POST" action="{{ route('typeMachines.update', $typeMachines) }}" class="space-y-6">
+                    @csrf
+                    @method('PUT')
+                    <table class="min-w-full divide-y divide-gray-200 dark:divide-gray-600">
+                        <thead class="bg-gray-50 dark:bg-gray-700">
+                            <tr>
+                                <th class="px-4 py-2 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase">Tipo de máquina</th>
+                                <th class="px-4 py-2 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase">Kilómetros a realizarse mantenimiento</th>
+                            </tr>
+                        </thead>
+                        <tbody class="bg-white dark:bg-gray-800 divide-y divide-gray-200 dark:divide-gray-700">
+                            @foreach ($typeMachines as $typeMachine)
+                                <tr>
+                                    <td class="px-4 py-2 text-sm text-gray-900 dark:text-gray-100">{{ $typeMachine->name }}</td>
+                                    <td class="px-4 py-2 text-sm text-gray-900 dark:text-gray-100">
+                                        <input type="number" value="{{ old('kilometers_maintenance.' . $typeMachine->id, $typeMachine->kilometers_maintenance) }}" 
+                                        name="kilometers_maintenance[{{ $typeMachine->id }}]" 
+                                        class="w-24 px-2 py-1 border rounded dark:bg-gray-700 dark:text-white">
+                                    </td>
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                    <x-primary-button class="mt-4">
+                        {{ __('Actualizar tipos de máquina') }}
+                    </x-primary-button>
+                </form>
+            </div>
+        </div>
+    </div>
 </x-app-layout>

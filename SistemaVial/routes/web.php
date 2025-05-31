@@ -5,6 +5,7 @@ use App\Http\Controllers\ConstructionController;
 use App\Http\Controllers\MachineController;
 use App\Http\Controllers\ConstructionMachinesController;
 use App\Http\Controllers\MaintenanceController;
+use App\Http\Controllers\TypeMachineController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -22,6 +23,7 @@ Route::middleware('auth')->group(function () {
     Route::resource('/constructions', ConstructionController::class);
     Route::resource('/machines', MachineController::class);
     Route::resource('/constructionMachines', ConstructionMachinesController::class);
+    Route::resource('typeMachines', TypeMachineController::class);
     Route::resource('maintenance', MaintenanceController::class)->except(['show']);
     Route::get('maintenance/machine/{machine}', [MaintenanceController::class, 'show'])->name('maintenance.show');
 });

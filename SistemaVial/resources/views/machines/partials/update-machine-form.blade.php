@@ -17,7 +17,6 @@
             <form method="POST" action="{{ route('machines.update', $machine) }}" class="space-y-4">
                 @csrf
                 @method('PUT')
-
                 <div>
                     <label class="block text-sm font-medium text-gray-700 dark:text-gray-200">Marca y modelo</label>
                     <input type="text" name="brand_model" value="{{ $machine->brand_model }}"
