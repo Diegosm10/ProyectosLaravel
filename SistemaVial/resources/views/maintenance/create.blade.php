@@ -56,7 +56,11 @@
                             class="mt-1 block w-full rounded-md border-gray-300 dark:border-gray-600 dark:bg-gray-900 dark:text-white shadow-sm focus:ring focus:ring-indigo-200">
                             <option selected>Seleccionar...</option>
                             @foreach ($machines as $machine)
-                                <option value="{{$machine->id}}" data-kilometers="{{ $machine->kilometers }}">{{$machine->brand_model . ' ' . $machine->type_machines->name}}</option>
+                                <option value="{{ $machine->id }}"
+                                    data-kilometers="{{ $machine->kilometers }}"
+                                    {{ isset($selectedMachineId) && $selectedMachineId == $machine->id ? 'selected' : '' }}>
+                                    {{ $machine->brand_model . ' ' . $machine->type_machines->name }}
+                                </option>
                             @endforeach
                         </select>
                     </div>

@@ -5,7 +5,7 @@
 Es necesario realizarle mantenimiento a la máquina {{$machine->brand_model . ' ' . $machine->type_machines->name}}
 </x-mail::panel>
 
-<x-mail::button :url="route('maintenance.create', $machine->id)" color="primary">
+<x-mail::button :url="route('maintenance.create',['machine_id' => $machine->id])" color="primary">
     Click aqui para registrarle un mantenimiento nuevo
 </x-mail::button>
 

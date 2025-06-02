@@ -15,4 +15,10 @@ function showKilometers() {
 }
 
 document.getElementById('inputMachine').addEventListener('change', showKilometers);
+window.onload = () => {
+        const select = document.getElementById('inputMachine');
+        if (select.value) {
+            showKilometers();
+        }
+    }
 

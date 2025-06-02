@@ -21,6 +21,11 @@ class Machine extends Model
         return $this->belongsToMany(Construction::class, 'construction_machines');
     }
 
+    public function constructionMachines()
+    {
+    return $this->hasMany(ConstructionMachines::class, 'machine_id');
+    }
+
     public function type_machines(){
         return $this->belongsTo(TypeMachine::class, 'type_machine_id', 'id');
     }

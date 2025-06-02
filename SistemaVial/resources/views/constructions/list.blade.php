@@ -10,6 +10,13 @@
 
     <div class="py-6">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+            @if (session('error'))
+                    <div class="mb-4 p-4 text-sm text-red-700 bg-red-100 dark:bg-red-900 dark:text-red-200 rounded-lg">
+                        <ul class="list-disc list-inside">
+                            {{ session('error') }}
+                        </ul>
+                    </div>
+            @endif
             @if (session('success'))
                 <div class="mb-4 p-4 text-sm text-green-700 bg-green-100 dark:bg-green-900 dark:text-green-200 rounded-lg">
                     {{ session('success') }}
@@ -31,6 +38,15 @@
                         </select>
                     </div>
                     <x-primary-button class="h-10">{{ __('Filtrar') }}</x-primary-button>
+                </form>
+                <form method="GET" action="{{ route('constructions.reportMonthly') }}" class="flex gap-4 items-end flex-wrap mt-4">
+                    <div>
+                        <label for="month" class="block text-sm text-gray-700 dark:text-gray-300">Mes</label>
+                        <input type="month" name="month" id="month"
+                            class="mt-1 block w-full rounded-md border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-white shadow-sm focus:ring focus:ring-indigo-200"
+                            required>
+                    </div>
+                    <x-primary-button class="h-10">{{ __('Generar PDF') }}</x-primary-button>
                 </form>
             </div>
 

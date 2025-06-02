@@ -18,12 +18,18 @@ class MaintenanceController extends Controller
 
     }
 
-    public function create()
-    {
-    $machines = Machine::all();
+    public function create(Request $request)
+{
+    $machineId = $request->input('machine_id');
+    $machines = Machine::with('type_machines')->get();
     $typeMachines = TypeMachine::all();
-    return view("maintenance.create", compact("machines", "typeMachines"));
-    }
+
+    return view('maintenance.create', [
+        'machines' => $machines,
+        'typeMachines' => $typeMachines,
+        'selectedMachineId' => $machineId
+    ]);
+}
 
     public function store(Request $request)
     {

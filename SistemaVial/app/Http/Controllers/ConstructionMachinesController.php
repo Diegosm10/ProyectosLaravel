@@ -7,7 +7,7 @@ use App\Models\Machine;
 use App\Models\ConstructionMachines;
 use App\Models\Province;
 use Illuminate\Http\Request;
-use App\Events\AlertMaintenanceMachineEvent;
+use App\Events\EmailMaintenanceMachineEvent;
 use App\Notifications\MachineNeedsMaintenance;
 use Illuminate\Support\Facades\Notification;
 
@@ -76,7 +76,7 @@ class ConstructionMachinesController extends Controller
         $machine = $constructionMachine->machine;
         $machine->kilometers += $request->km_traveled;
         $machine->save();
-        event(new AlertMaintenanceMachineEvent($machine));       
+        event(new EmailMaintenanceMachineEvent($machine));       
         return redirect()->back()->with('success', 'Obra activa actualizada correctamente');
     }
 
