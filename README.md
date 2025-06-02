@@ -52,7 +52,7 @@ Antes de iniciar, asegúrate de tener instalado:
 ⚙️ Instalación
 Clonar el repositorio
     
-    git clone https://github.com/tu_usuario/sistema-gestion-vial.git
+    git clone https://github.com/Diegosm10/ProyectosLaravel.git
     
     cd sistema-gestion-vial
 
