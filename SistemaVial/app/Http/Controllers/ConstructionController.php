@@ -102,6 +102,6 @@ class ConstructionController extends Controller
         'startMonth' => $startMonth,
         'endMonth' => $endMonth
         ]);
-        return $pdf->download("reporte_mensual_{$month}.pdf");
+        return $pdf->stream("reporte_mensual_{$month}.pdf");
     }
 }
